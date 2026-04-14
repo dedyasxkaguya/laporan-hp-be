@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("type");
             $table->string("officer");
             $table->string("image");
+            $table->text("notes")->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ Route::resource('/user', UserController::class);
 
 Route::resource('/class', StudentClassController::class);
 
-Route::resource('/report', ReportController::class);
+Route::apiResource('/report', ReportController::class);
 
 Route::resource('/teacher', TeacherController::class);
 
@@ -27,5 +27,6 @@ Route::get('/class/search/latest', [StudentClassController::class,'indexLatest']
 Route::get('/class/searchByUUID/{uuid}', [StudentClassController::class,'searchByUUID']);
 Route::get('/report/type/pengumpulan', [ReportController::class,'indexPengumpulan']);
 Route::get('/report/type/pengambilan', [ReportController::class,'indexPengambilan']);
+Route::get('/report/type/peminjaman', [ReportController::class,'indexPeminjaman']);
 
 Route::post('/login', [UserController::class,'login']);

@@ -19,11 +19,16 @@ class ReportController
 
     public function indexPengumpulan()
     {
-        return response()->json(Report::where('type',"Pengumpulan")->latest()->get()->load('student_class')->load('teacher'));
+        return response()->json(Report::where('type', 'Pengumpulan')->latest()->get()->load('student_class')->load('teacher'));
     }
+
     public function indexPengambilan()
     {
-        return response()->json(Report::where('type',"Pengambilan")->latest()->get()->load('student_class')->load('teacher'));
+        return response()->json(Report::where('type', 'Pengambilan')->latest()->get()->load('student_class')->load('teacher'));
+    }
+    public function indexPeminjaman()
+    {
+        return response()->json(Report::where('type', 'Peminjaman')->latest()->get()->load('student_class')->load('teacher'));
     }
 
     /**
@@ -39,22 +44,23 @@ class ReportController
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $image = $request->file('image')->store('laporan_image');
-    
+
             $data = new Report;
             $data->officer = $request->officer;
             $data->phone = $request->phone;
+            $data->notes = $request->notes;
             $data->date = now();
             $data->type = $request->type;
             $data->image = $image;
             $data->teacher_id = $request->teacher;
             $data->student_class_id = $request->class_id;
-    
+
             $data->save();
-    
+
             return response()->json($data);
-        }catch(Exception $err){
+        } catch (Exception $err) {
             return response()->json($err);
         }
     }
@@ -86,8 +92,25 @@ class ReportController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Report $report)
+    public function destroy($id)
     {
-        //
+        $data = Report::find($id);
+        $fixed_data = $data;
+        if ($data) {
+            $data->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => "Berhasil menghapus data id { $fixed_data->id }",
+                'data' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal menghapus data',
+                'data' => 'Tidak ada data',
+            ]);
+        }
+        // return response()->json($id);
     }
 }
