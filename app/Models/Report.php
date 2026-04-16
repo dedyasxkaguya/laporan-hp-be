@@ -13,9 +13,6 @@ class Report extends Model
     public function student_class(){
         return $this->belongsTo(StudentClass::class);
     }
-    public function Teacher(){
-        return $this->belongsTo(Teacher::class);
-    }
     public function getFormattedDateAttribute(){
         return $this->date ? $this->created_at->toDateString() : null;
     }

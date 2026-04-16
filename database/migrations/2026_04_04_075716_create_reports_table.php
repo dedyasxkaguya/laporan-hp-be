@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId("student_class_id");
-            $table->foreignId("teacher_id");
             $table->string("date");
             $table->integer("phone");
             $table->string("type");
             $table->string("officer");
+            $table->string("teacher");
             $table->string("image");
             $table->text("notes")->nullable();
             $table->timestamps();

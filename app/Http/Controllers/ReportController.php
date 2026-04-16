@@ -14,21 +14,21 @@ class ReportController
      */
     public function index()
     {
-        return response()->json(Report::all()->load('student_class')->load('teacher'));
+        return response()->json(Report::all()->load('student_class'));
     }
 
     public function indexPengumpulan()
     {
-        return response()->json(Report::where('type', 'Pengumpulan')->latest()->get()->load('student_class')->load('teacher'));
+        return response()->json(Report::where('type', 'Pengumpulan')->latest()->get()->load('student_class'));
     }
 
     public function indexPengambilan()
     {
-        return response()->json(Report::where('type', 'Pengambilan')->latest()->get()->load('student_class')->load('teacher'));
+        return response()->json(Report::where('type', 'Pengambilan')->latest()->get()->load('student_class'));
     }
     public function indexPeminjaman()
     {
-        return response()->json(Report::where('type', 'Peminjaman')->latest()->get()->load('student_class')->load('teacher'));
+        return response()->json(Report::where('type', 'Peminjaman')->latest()->get()->load('student_class'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ReportController
             $data->date = now();
             $data->type = $request->type;
             $data->image = $image;
-            $data->teacher_id = $request->teacher;
+            $data->teacher = $request->teacher;
             $data->student_class_id = $request->class_id;
 
             $data->save();

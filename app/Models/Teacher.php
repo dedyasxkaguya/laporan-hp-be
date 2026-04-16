@@ -12,7 +12,4 @@ class Teacher extends Model
     public function Student_class(){
         $this->hasOne(StudentClass::class);
     }
-    public function Reports(){
-        return $this->hasMany(Report::class);
-    }
 }
