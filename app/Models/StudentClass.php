@@ -12,6 +12,9 @@ class StudentClass extends Model
     public function Reports() {
         return $this->hasMany(Report::class)->latest();
     }
+    public function weeklyReports() {
+        return $this->hasMany(Report::class)->latest()->limit(7);
+    }
     public function LatestReport() {
         return $this->hasOne(Report::class)->latestOfMany();
     }

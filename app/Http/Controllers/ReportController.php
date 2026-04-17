@@ -30,7 +30,6 @@ class ReportController
     {
         return response()->json(Report::where('type', 'Peminjaman')->latest()->get()->load('student_class'));
     }
-
     /**
      * Show the form for creating a new resource.
      */

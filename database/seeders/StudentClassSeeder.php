@@ -263,18 +263,20 @@ class StudentClassSeeder extends Seeder
         foreach ($classes as $data) {
             $uuid = Str::replaceFirst(' ', '-', $data['name']);
             $teacher = Teacher::where('class_name', $data['uuid'])->first();
-            DB::table('student_classes')->insert([
-                'grade' => $data['grade'],
-                'name' => $data['name'],
-                'vocation' => $data['vocation'],
-                'full_name' => $data['uuid'],
-                'uuid' => "{$data['grade']}-{$uuid}",
-                'teacher_id' => $teacher->id,
-                // 'teacher_id'=>1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            if ($data['vocation'] == 'INFORMATIKA') {
 
+                DB::table('student_classes')->insert([
+                    'grade' => $data['grade'],
+                    'name' => $data['name'],
+                    'vocation' => $data['vocation'],
+                    'full_name' => $data['uuid'],
+                    'uuid' => "{$data['grade']}-{$uuid}",
+                    'teacher_id' => $teacher->id,
+                    // 'teacher_id'=>1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }

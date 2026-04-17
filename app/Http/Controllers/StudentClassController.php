@@ -21,6 +21,12 @@ class StudentClassController
         return response()->json(StudentClass::all()->load('latestReport'));
         // return response()->json("Visca Real Betis");
     }
+    // public function indexWeekly($class)
+    // {
+    //     // return response()->json(StudentClass::all()->load('reports'));
+    //     return response()->json(StudentClass::where('full_name',$class));
+    //     // return response()->json("Visca Real Betis");
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -51,7 +57,7 @@ class StudentClassController
         $studentClass = StudentClass::where('uuid', $uuid)->first();
         if ($studentClass) {
             $studentClass->status = true;
-            return response()->json($studentClass->load('reports')->load('teacher'));
+            return response()->json($studentClass->load('weeklyReports')->load('reports')->load('teacher'));
         } else {
             return response()->json(['status' => false]);
         }

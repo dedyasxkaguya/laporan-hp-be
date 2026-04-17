@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Report;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -35,5 +36,6 @@ class DatabaseSeeder extends Seeder
         }
         $this->call(TeacherSeeder::class);
         $this->call(StudentClassSeeder::class);
+        Report::factory(256)->create();
     }
 }
